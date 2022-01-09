@@ -1,3 +1,25 @@
+// The MIT License (MIT)
+
+// Copyright (c) 2021 Diego Ramírez
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 #include <list>
 #include <unordered_map>
 #include <vector>
@@ -73,15 +95,15 @@ namespace gp0
         protected:
             std::vector<std::list<std::pair<int,W>>> edges;
         public:
-            unsigned long long size(){
+            virtual unsigned long long size(){
                 return edges.size();
             }
 
-            void addVertex(int key){
+            virtual void addVertex(int key){
                 edges.push_back(std::list<std::pair<int,W>> ());
             }
 
-            void addEdge(int source, int destiny, W weight){
+            virtual void addEdge(int source, int destiny, W weight){
                 bool alreadyExists = false;
                 for(std::pair<int,W> next: edges[source]){
                     if (next.first == destiny){
@@ -96,7 +118,7 @@ namespace gp0
                 }
             }
 
-            W getWeight(int source, int destiny){
+            virtual W getWeight(int source, int destiny){
                 for(std::pair<int,W> next: edges[source]){
                     if (next.first == destiny){
                         return next.second;
